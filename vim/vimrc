@@ -1,0 +1,184 @@
+
+" hiroyuki vimrc
+" Changed at 2009-09-23T12:35:02
+
+syntax on
+
+filetype plugin indent on
+" color setting
+if &term =~ "xterm-256color"
+    let xterm16_colormap   = 'allblue'
+    let xterm16_brightness = 'default' " default
+    colo xterm16
+    " omini..
+    " highlight Pmenu     ctermbg=#4c745a
+    " highlight PmenuSel  ctermbg=#d4b979
+    " highlight PmenuSbar ctermbg=#333333
+else
+    " let xterm16_brightness = 'low'
+    " let xterm16_colormap = 'allblue'
+    " colo xterm16
+    " colo wombat
+    " colo pyte
+    colo chela_light
+endif
+
+
+" options
+set backspace=eol,indent,start
+
+"" search pattern
+set ignorecase
+set smartcase
+set hlsearch
+set incsearch
+
+"" status
+set showmode
+set showcmd
+set showmatch
+
+"" show line number 
+set number
+
+"" indenting
+set expandtab
+set ts=2
+set shiftwidth=2
+set softtabstop=2
+
+"" backup
+set nobackup
+
+"" statusline
+set laststatus=2
+set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']['.&ft.']'}%{GitBranchInfoString()}%=%l,%c%V%8P
+
+"" encodings
+set termencoding=utf-8
+set encoding=utf-8
+set fileencodings=utf-8,euc-jp,iso-2022-jp
+set ambiwidth=double
+
+" key binding
+
+"" edit vimrc
+nnoremap <Space>.	:<C-u>edit $MYVIMRC<Enter>
+
+"" reload vimrc
+nnoremap <Space>s.	:<C-u>source $MYVIMRC<Enter>
+
+"" help
+nnoremap <C-h>  :<C-u>help<Space>
+
+"" show help about a word under cursor
+nnoremap <C-h><C-h> :<C-u>help<Space><C-r><C-w><Enter>
+
+"" : -> ;
+noremap ; :
+noremap : ;
+
+"" j -> gj, k -> gk
+noremap j gj
+noremap k gk
+noremap gj j
+noremap gk k
+
+"" insert date
+inoremap <expr> ,df strftime('%Y-%m-%dT%H:%M:%S')
+inoremap <expr> ,dd strftime('%Y-%m-%d')
+inoremap <expr> ,dt strftime('%H:%M:%S')
+
+"" gc (g changee)
+nnoremap gc `[v`]
+vnoremap gc :<C-u>normal gc<Enter>
+onoremap gc :<C-u>normal gc<Enter>
+
+"" redraw
+nnoremap sh :<C-u>redraw!<Enter>
+
+"""""""""""""""""""""""""""""""""""""""""
+" autocmds
+"----------------------------------------
+" autocmd!
+
+
+""""""""""""""""""""""""""""""""""""""""""
+" Plugin Settings
+"
+" MEMO
+" - install help tag
+"   :helptags ~/.vim/doc
+""""""""""""""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""""""""""""""
+" Fuzzy Finder
+"-----------------------------------------
+
+" Options
+let g:FuzzyFinderOptions = { 'Base':{}, 'Buffer':{}, 'File':{}, 'Dir':{}, 'MruFile':{}, 'MruCmd':{}, 'Bookmark':{}, 'Tag':{}, 'TaggedFile':{}}
+let g:FuzzyFinderOptions.Base.ignore_case = 1
+let g:FuzzyFinderOptions.MruFile.max_item = 100
+let g:FuzzyFinderOptions.MruCmd.max_item = 200
+
+" Binding
+nnoremap gb :<C-u>FuzzyFinderFile<Enter>
+nnoremap bg :<C-u>FuzzyFinderBuffer<Enter>
+nnoremap gt :<C-u>FuzzyFinderTag<Enker>
+nnoremap bG :<C-u>FuzzyFinderFile <C-r>=expand('%:~:.')[:-1-len(expand('%:~:.:t'))]<Enter><Enter>
+nnoremap br :<C-u>FuzzyFinderMru<Enter>
+
+""""""""""""""""""""""""""""""""""""""""""
+" Rails.vim
+"-----------------------------------------
+
+
+""""""""""""""""""""""""""""""""""""""""""
+" Surround
+"-----------------------------------------
+
+let g:surround_45 = "<% \r -%>"
+let g:surround_61 = "<%= \r %>"
+
+""""""""""""""""""""""""""""""""""""""""""
+" cpan-list.vim
+"-----------------------------------------
+
+let g:cpan_win_height=10
+"g:cpan_browser_command  : command for launching browser
+"g:cpan_win_type         : v (vertical) or s (horizontal) cpan window
+"g:cpan_win_width        : cpan window width (when vertical)
+"g:cpan_win_height       : cpan window height (when horizontal)
+"g:cpan_win_mode         : default cpan window mode (search installed modules or all modules or currentlib ./lib)
+"g:cpan_installed_cache  : filename of installed package cache
+"g:cpan_source_cache     : filename of package source cache
+"g:cpan_cache_expiry     : cache expirytime in minutes
+"g:cpan_max_result       : max search result
+"g:cpan_install_command  : command for installing cpan modules
+"g:cpan_user_defined_sources : user-defined package source paths
+
+
+""""""""""""""""""""""""""""""""""""""""""
+" taglist
+" ----------------------------------------
+
+let Tlist_Auto_Open       = 1
+let Tlist_Close_On_Select = 1
+nnoremap <silent> tl :TlistToggle<CR>
+nnoremap <silent> tq :TlistClose<CR>
+
+""""""""""""""""""""""""""""""""""""""""""
+" vcssupport
+" ----------------------------------------
+
+""""""""""""""""""""""""""""""""""""""""""
+" git-branch-info
+" ----------------------------------------
+
+let g:git_branch_status_text=": git :"
+
+""""""""""""""""""""""""""""""""""""""""""
+" git.vim
+" ----------------------------------------
+
+let mapleader = ","
