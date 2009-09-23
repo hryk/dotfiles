@@ -1,0 +1,34 @@
+#change the hardstatus settings to give an window list at the bottom of exit the
+#screen, with the time and date and with the current window  #highlighted
+#hardstatus #alwayslastline
+#hardstatus string '%-Lw{= mK}50>{= KW}n%f* %t%+Lw{= mK}< %-={= kG}D %d %M %Y %c:%s%{-}'
+
+# Use ` instead of Ctrl + a
+# For HHK2
+# escape ^t^t
+
+escape ``
+
+autodetach on
+startup_message off
+vbell off
+defscrollback 20000
+defshell zsh
+nethack on
+defutf8 on
+defkanji utf-8
+encoding utf-8 utf-8
+defencoding utf-8
+# Pretty status bar at the bottom.
+#hardstatus alwayslastline
+#hardstatus string "%{gk}[ %H {%G}{%g}][%= %?{wk}-Lw%?%{r}{w}(%n*{W}f %t%??(%u){r})?%+Lw%?%?%= %{g}][%{B} %m/%d %c {%W}{%g}]"
+hardstatus alwayslastline "%{Gk}[%H | %Y-%m-%d%C:%s]%{Ck}[%= %-w%{=b}%n %t%{-}%+w %=]%{Gk}[Load:  %l ]%{Rk}[ %u ]"
+#hardstatus string "%-w%{=b}%n %t%{-}%+w"
+
+termcapinfo xterm* 'hs:ts=\\E]2;:fs=\\007:ds=\\E]2;screen\\007'
+
+# Bind F11 and F12 (NOT F1 and F2) to previous and next screen window
+bindkey -k F1 prev
+bindkey -k F2 next
+
+term xterm-256color
