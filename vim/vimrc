@@ -4,26 +4,6 @@
 
 syntax on
 
-filetype plugin indent on
-" color setting
-if &term =~ "xterm-256color"
-    let xterm16_colormap   = 'allblue'
-    let xterm16_brightness = 'default' " default
-    colo xterm16
-    " omini..
-    " highlight Pmenu     ctermbg=#4c745a
-    " highlight PmenuSel  ctermbg=#d4b979
-    " highlight PmenuSbar ctermbg=#333333
-else
-    " let xterm16_brightness = 'low'
-    " let xterm16_colormap = 'allblue'
-    " colo xterm16
-    " colo wombat
-    " colo pyte
-    colo chela_light
-endif
-
-
 " options
 set backspace=eol,indent,start
 
@@ -59,6 +39,10 @@ set termencoding=utf-8
 set encoding=utf-8
 set fileencodings=utf-8,euc-jp,iso-2022-jp
 set ambiwidth=double
+
+"" folding
+
+set foldmethod=marker
 
 " key binding
 
@@ -112,21 +96,25 @@ nnoremap sh :<C-u>redraw!<Enter>
 """"""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""
-" Fuzzy Finder
+" Fuzzy Finder - 3.2
 "-----------------------------------------
 
-" Options
-let g:FuzzyFinderOptions = { 'Base':{}, 'Buffer':{}, 'File':{}, 'Dir':{}, 'MruFile':{}, 'MruCmd':{}, 'Bookmark':{}, 'Tag':{}, 'TaggedFile':{}}
-let g:FuzzyFinderOptions.Base.ignore_case = 1
-let g:FuzzyFinderOptions.MruFile.max_item = 100
-let g:FuzzyFinderOptions.MruCmd.max_item = 200
+"" Options
+let g:fuf_keyOpen = '<C-j>'
+let g:fuf_keyOpenSplit = '<CR>'
+let g:fuf_infoFile = '~/.vim/fufinfo'
 
 " Binding
-nnoremap gb :<C-u>FuzzyFinderFile<Enter>
-nnoremap bg :<C-u>FuzzyFinderBuffer<Enter>
-nnoremap gt :<C-u>FuzzyFinderTag<Enker>
-nnoremap bG :<C-u>FuzzyFinderFile <C-r>=expand('%:~:.')[:-1-len(expand('%:~:.:t'))]<Enter><Enter>
-nnoremap br :<C-u>FuzzyFinderMru<Enter>
+nnoremap <silent> <C-d><C-d> :<C-u>FufAddBookmark<Enter>
+nnoremap <silent> <C-d><C-e> :<C-u>FufEditInfo<Enter>
+nnoremap <silent> gb :<C-u>FufFile<Enter>
+nnoremap <silent> bg :<C-u>FufBuffer<Enter>
+nnoremap <silent> gd :<C-u>FufDir<Enter>
+nnoremap <silent> bd :<C-u>FufBookmark<Enter>
+nnoremap <silent> br :<C-u>FufMruFile<Enter>
+nnoremap <silent> bc :<C-u>FufMruCmd<Enter>
+nnoremap <silent> gt :<C-u>FufTag<Enker>
+nnoremap <silent> bG :<C-u>FufFile <C-r>=expand('%:~:.')[:-1-len(expand('%:~:.:t'))]<Enter><Enter>
 
 """"""""""""""""""""""""""""""""""""""""""
 " Rails.vim
@@ -183,10 +171,8 @@ let g:git_branch_status_text=": git :"
 
 let mapleader = ","
 
-
 """"""""""""""""""""""""""""""""""""""""""
 " outputz.vim
 " ----------------------------------------
 
-let g:outputz_secret_key=""
-
+let g:outputz_secret_key="0Qb88DYAiqhb"
