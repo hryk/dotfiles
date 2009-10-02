@@ -66,7 +66,7 @@ function! s:send(n)  "{{{2
     return
   endif
 
-  silent! execute printf('!curl --form-string key=%s --form-string uri=%s --form-string "size=%d" http://outputz.com/api/post',
+  silent! execute printf('!curl --form-string key=%s --form-string uri=%s --form-string size=%d http://outputz.com/api/post',
   \ fnameescape(g:outputz_secret_key),
   \ fnameescape({g:outputz_uri_function}()),
   \ a:n)
