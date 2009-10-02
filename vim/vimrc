@@ -3,6 +3,9 @@
 " Changed at 2009-09-23T12:35:02
 
 syntax on
+filetype on
+filetype indent on
+filetype plugin on
 
 " options
 set backspace=eol,indent,start
@@ -105,8 +108,8 @@ let g:fuf_keyOpenSplit = '<CR>'
 let g:fuf_infoFile = '~/.vim/fufinfo'
 
 " Binding
-nnoremap <silent> <C-d><C-d> :<C-u>FufAddBookmark<Enter>
-nnoremap <silent> <C-d><C-e> :<C-u>FufEditInfo<Enter>
+nnoremap <silent> <C-f><C-d> :<C-u>FufAddBookmark<Enter>
+nnoremap <silent> <C-f><C-e> :<C-u>FufEditInfo<Enter>
 nnoremap <silent> gb :<C-u>FufFile<Enter>
 nnoremap <silent> bg :<C-u>FufBuffer<Enter>
 nnoremap <silent> gd :<C-u>FufDir<Enter>
