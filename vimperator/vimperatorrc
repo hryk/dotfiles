@@ -1,0 +1,63 @@
+" set nobeep
+" set forcuscontent
+set wildoptions=auto
+set wim="list:full"
+set complete=bsh
+" set t_vb=""
+
+" Disable vimperator keys on Google mail and Google reader
+
+autocmd LocationChange .* :js modes.passAllKeys = /mail\.google\.com|www\.google\.com\/reader\/view/.test(buffer.URL)
+
+" Set the Vim filetype to "mail" when editing mail in GMail with the external editor:
+" :au LocationChange .* :set editor=gvim -f
+" :au LocationChange mail\.google\.com :set editor=gvim -f -c 'set ft=mail'
+
+" ======================================================================
+" vimperator 1.2pre 06-17?ȍ~??OS???̃V???[?g?J?b?g???????Ȃ??Ȃ��??̂ő???
+map  <M-c> <C-v><M-c>
+imap <C-f> <Right>
+imap <C-b> <Left>
+imap <C-p> <Up>
+imap <C-n> <Down>
+imap <M-a> <C-v><M-a>
+imap <M-z> <C-v><M-z>
+imap <M-x> <C-v><M-x>
+imap <M-c> <C-v><M-c>
+imap <M-v> <C-v><M-v>
+cmap <C-f> <Right>
+cmap <C-b> <Left>
+cmap <C-p> <Up>
+cmap <C-n> <Down>
+cmap <M-a> <C-v><M-a>
+cmap <M-z> <C-v><M-z>
+cmap <M-x> <C-v><M-x>
+cmap <M-c> <C-v><M-c>
+cmap <M-v> <C-v><M-v>
+
+" copy.js
+map c :copy<Space>
+js <<EOM
+liberator.globalVariables.copy_templates = [
+  { label: 'titleAndURL',    value: '%TITLE% %URL%' },
+  { label: 'title',          value: '%TITLE%' },
+  { label: 'url',            value: '%URL%' },
+  { label: 'markdown',       value: '[%TITLE%](%URL% "%TITLE%")' },
+  { label: 'markdownsel',    value: '[%SEL%](%URL% "%TITLE%")' },
+  { label: 'htmlblockquote', value: '<blockquote cite="%URL%" title="%TITLE%">%HTMLSEL%</blockquote>' }
+];
+EOM
+
+" Show feed-button to statusbar
+:javascript <<EOF
+(function(){
+var feedPanel = document.createElement('statusbarpanel');
+var feedButton = document.getElementById('feed-button');
+feedPanel.setAttribute('id','feed-panel-clone');
+feedPanel.appendChild(feedButton.cloneNode(true));
+feedButton.parentNode.removeChild(feedButton);
+document.getElementById('status-bar').insertBefore(feedPanel,document.getElementById('security-button'));
+})();
+EOF
+
+echo ".vimperatorrc sourced"
