@@ -15,6 +15,7 @@ set ignorecase
 set smartcase
 set hlsearch
 set incsearch
+set nocompatible
 
 "" status
 set showmode
@@ -88,6 +89,9 @@ nnoremap sh :<C-u>redraw!<Enter>
 " autocmds
 "----------------------------------------
 " autocmd!
+"
+
+au BufRead,BufNewFile *.thor             setfiletype ruby
 
 
 """"""""""""""""""""""""""""""""""""""""""
@@ -155,6 +159,7 @@ let g:cpan_win_height=10
 
 let Tlist_Auto_Open       = 1
 let Tlist_Close_On_Select = 1
+let Tlist_Ctags_Cmd='/usr/local/bin/ctags'
 nnoremap <silent> tl :TlistToggle<CR>
 nnoremap <silent> tq :TlistClose<CR>
 
@@ -179,3 +184,19 @@ let mapleader = ","
 " ----------------------------------------
 
 let g:outputz_secret_key="0Qb88DYAiqhb"
+
+""""""""""""""""""""""""""""""""""""""""""
+" cpan.vim
+" ----------------------------------------
+
+let g:cpan_install_command = 'sudo cpan'
+let g:cpan_browser_command = 'cpan'
+" let g:cpan_win_mode   = g:CPAN.Mode.Installed
+let g:cpan_win_type   = 'vsplit'   " v (vertical) or s (split)
+let g:cpan_win_width  = 30
+let g:cpan_win_height = 10
+" let g:cpan_installed_cache  = expand('~/.vim-cpan-installed-modules')
+" let g:cpan_source_cache     = expand('~/.vim-cpan-source')
+let g:cpan_cache_expiry     = 60 * 24 * 3   " 7 days
+let g:cpan_max_result = 50
+let g:cpan_user_defined_sources = []
