@@ -1,11 +1,15 @@
-
 " hiroyuki vimrc
+"
+" 2010-03-19T04:41:38 added HTML.vim settings
 " Changed at 2009-09-23T12:35:02
+
+set nocompatible
 
 syntax on
 filetype on
 filetype indent on
 filetype plugin on
+
 
 " options
 set backspace=eol,indent,start
@@ -15,7 +19,6 @@ set ignorecase
 set smartcase
 set hlsearch
 set incsearch
-set nocompatible
 
 "" status
 set showmode
@@ -43,6 +46,10 @@ set termencoding=utf-8
 set encoding=utf-8
 set fileencodings=utf-8,euc-jp,iso-2022-jp
 set ambiwidth=double
+
+nnoremap fe :<C-u>e ++enc=euc-jp<Enter>
+nnoremap fs :<C-u>e ++enc=shift-jis<Enter>
+nnoremap fu :<C-u>e ++enc=utf-8<Enter>
 
 "" folding
 
@@ -90,8 +97,9 @@ nnoremap sh :<C-u>redraw!<Enter>
 "----------------------------------------
 " autocmd!
 "
-
 au BufRead,BufNewFile *.thor             setfiletype ruby
+" au BufRead,BufNewFile *.as               setfiletype actionscript
+au BufNewFile,BufRead *.as setf actionscript
 
 
 """"""""""""""""""""""""""""""""""""""""""
@@ -159,7 +167,7 @@ let g:cpan_win_height=10
 
 let Tlist_Auto_Open       = 1
 let Tlist_Close_On_Select = 1
-let Tlist_Ctags_Cmd='/usr/local/bin/ctags'
+let Tlist_Ctags_Cmd='/opt/local/bin/ctags'
 nnoremap <silent> tl :TlistToggle<CR>
 nnoremap <silent> tq :TlistClose<CR>
 
@@ -183,7 +191,8 @@ let mapleader = ","
 " outputz.vim
 " ----------------------------------------
 
-" let g:outputz_secret_key=""
+let g:outputz_secret_key="0Qb88DYAiqhb"
+let g:unable_outputz = 1
 
 """"""""""""""""""""""""""""""""""""""""""
 " cpan.vim
@@ -200,3 +209,29 @@ let g:cpan_win_height = 10
 let g:cpan_cache_expiry     = 60 * 24 * 3   " 7 days
 let g:cpan_max_result = 50
 let g:cpan_user_defined_sources = []
+
+""""""""""""""""""""""""""""""""""""""""""
+" the vim otl
+" ----------------------------------------
+
+set runtimepath+=~/.vim-otl
+
+""""""""""""""""""""""""""""""""""""""""""
+" HTML.vim
+" ----------------------------------------
+
+let g:do_xhtml_mappings = 'yes'
+let g:html_tag_case = 'lowercase'
+let g:html_template = '~/.vim/templates/default.html'
+let g:no_html_tab_mapping = "yes"
+let g:no_html_maps = '^\(;sp\|;ah\|;im\|;H\d\)$'
+
+""""""""""""""""""""""""""""""""""""""""""
+" VCSCommand.vim
+" ----------------------------------------
+
+" command Gd :VCSDiff
+" command Gb :VCSBlame
+nnoremap di :<C-u>VCSDiff<Enter>
+nnoremap bl :<C-u>VCSBlame<Enter>
+
