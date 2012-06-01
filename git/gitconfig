@@ -1,3 +1,8 @@
 [user]
-	name = hiroyuki
-	email = hello@hryk.info
+	name = Hiroyuki Nakamura
+	email = hiroyuki@1vq9.com
+[core]
+  editor = /usr/bin/vim
+	quotepath = false
+[push]
+  default = current

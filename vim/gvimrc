@@ -1,12 +1,5 @@
 " This is cocoa-vim specific rc file.
 
-"let xterm16_colormap = 'soft'
-"let xterm16_colormap = 'softlight'
-"let xterm16_colormap = 'standard'
-let xterm16_colormap = 'allblue'
-let xterm16_brightness = 'low'
-colo xterm16
-
 " tab operations
 nmap <silent> tp :tabprev<CR>
 nmap <silent> tn :tabnext<CR>

@@ -1,17 +1,17 @@
-" hiroyuki vimrc
-"
-" 2010-03-19T04:41:38 added HTML.vim settings
-" Changed at 2009-09-23T12:35:02
-
+" vimrc
 set nocompatible
-
+" Chicken Or Egg Dilemma
+"   http://gmarik.info/blog/2011/05/17/chicken-or-egg-dilemma
+source $HOME/.vim/bundles.vim " $ vim -u bundles.vim +BundleInstall +q
 syntax on
-filetype on
-filetype indent on
-filetype plugin on
 
+"" color scheme
+set background=light
+if has('gui_running')
+  colorscheme solarized
+  let g:solarized_termcolors=256
+endif
 
-" options
 set backspace=eol,indent,start
 
 "" search pattern
@@ -31,6 +31,7 @@ set number
 "" indenting
 set expandtab
 set ts=2
+" set tw=80
 set shiftwidth=2
 set softtabstop=2
 
@@ -39,7 +40,7 @@ set nobackup
 
 "" statusline
 set laststatus=2
-set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']['.&ft.']'}%{GitBranchInfoString()}%=%l,%c%V%8P
+set statusline=%<%f\%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']['.&ft.']'}%{fugitive#statusline()}/1p%=%l,%c%V%8P 
 
 "" encodings
 set termencoding=utf-8
@@ -56,6 +57,9 @@ nnoremap fu :<C-u>e ++enc=utf-8<Enter>
 set foldmethod=marker
 
 " key binding
+
+"" leader
+let mapleader=","
 
 "" edit vimrc
 nnoremap <Space>.	:<C-u>edit $MYVIMRC<Enter>
@@ -92,32 +96,61 @@ onoremap gc :<C-u>normal gc<Enter>
 "" redraw
 nnoremap sh :<C-u>redraw!<Enter>
 
+"" wordwrap
+" nnoremap GG gqG
+
+nnoremap <Leader>H :call<SID>LongLineHLToggle()<cr>
+hi OverLength ctermbg=none cterm=none
+match OverLength /\%>80v/
+fun! s:LongLineHLToggle()
+  if !exists('w:longlinehl')
+    let w:longlinehl = matchadd('ErrorMsg', '.\%>80v', 0)
+    echo "Long lines highlighted"
+  else
+    call matchdelete(w:longlinehl)
+    unl w:longlinehl
+    echo "Long lines unhighlighted"
+  endif
+endfunction
+
 """""""""""""""""""""""""""""""""""""""""
 " autocmds
 "----------------------------------------
 " autocmd!
 "
-au BufRead,BufNewFile *.thor             setfiletype ruby
-" au BufRead,BufNewFile *.as               setfiletype actionscript
-au BufNewFile,BufRead *.as setf actionscript
-
+au BufRead,BufNewFile *.thor   setf ruby
+au BufRead,BufNewFile *.coffee   setf coffee
+au BufNewFile,BufRead *.as     setf actionscript
+" delete trailing whitespace when saved.
+autocmd FileType c,cpp,java,php,ruby,javascript,haml,coffee,css autocmd BufWritePre <buffer> :%s/\s\+$//e
+" au FileType spec map <buffer> <Leader>o <Plug>AddChangelogItem
+" let spec_chglog_prepend = 1
 
 """"""""""""""""""""""""""""""""""""""""""
 " Plugin Settings
 "
-" MEMO
-" - install help tag
-"   :helptags ~/.vim/doc
+" Plugins are installed with Vundle.
+" see ~/.vim/bundles.vim
+"
 """"""""""""""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""""""""""""""
+" Coffee
+"-----------------------------------------
+
+hi link coffeeSpaceError NONE
+hi link coffeeSemicolonError NONE
+hi link coffeeReservedError NONE
 
 """"""""""""""""""""""""""""""""""""""""""
 " Fuzzy Finder - 3.2
 "-----------------------------------------
 
 "" Options
-let g:fuf_keyOpen = '<C-j>'
+let g:fuf_modesDisable = []
+let g:fuf_keyOpen      = '<C-j>'
 let g:fuf_keyOpenSplit = '<CR>'
-let g:fuf_infoFile = '~/.vim/fufinfo'
+let g:fuf_infoFile     = '~/.vim/fufinfo'
 
 " Binding
 nnoremap <silent> <C-f><C-d> :<C-u>FufAddBookmark<Enter>
@@ -135,6 +168,7 @@ nnoremap <silent> bG :<C-u>FufFile <C-r>=expand('%:~:.')[:-1-len(expand('%:~:.:t
 " Rails.vim
 "-----------------------------------------
 
+nnoremap rr :<C-u>1R<Space>
 
 """"""""""""""""""""""""""""""""""""""""""
 " Surround
@@ -142,38 +176,17 @@ nnoremap <silent> bG :<C-u>FufFile <C-r>=expand('%:~:.')[:-1-len(expand('%:~:.:t
 
 let g:surround_45 = "<% \r -%>"
 let g:surround_61 = "<%= \r %>"
-
-""""""""""""""""""""""""""""""""""""""""""
-" cpan-list.vim
-"-----------------------------------------
-
-let g:cpan_win_height=10
-"g:cpan_browser_command  : command for launching browser
-"g:cpan_win_type         : v (vertical) or s (horizontal) cpan window
-"g:cpan_win_width        : cpan window width (when vertical)
-"g:cpan_win_height       : cpan window height (when horizontal)
-"g:cpan_win_mode         : default cpan window mode (search installed modules or all modules or currentlib ./lib)
-"g:cpan_installed_cache  : filename of installed package cache
-"g:cpan_source_cache     : filename of package source cache
-"g:cpan_cache_expiry     : cache expirytime in minutes
-"g:cpan_max_result       : max search result
-"g:cpan_install_command  : command for installing cpan modules
-"g:cpan_user_defined_sources : user-defined package source paths
-
+let g:surround_{char2nr("g")} = "[[\r]]"
 
 """"""""""""""""""""""""""""""""""""""""""
 " taglist
 " ----------------------------------------
 
-let Tlist_Auto_Open       = 1
+let Tlist_Auto_Open       = 0
 let Tlist_Close_On_Select = 1
-let Tlist_Ctags_Cmd='/opt/local/bin/ctags'
+let Tlist_Ctags_Cmd='/usr/local/bin/ctags'
 nnoremap <silent> tl :TlistToggle<CR>
 nnoremap <silent> tq :TlistClose<CR>
-
-""""""""""""""""""""""""""""""""""""""""""
-" vcssupport
-" ----------------------------------------
 
 """"""""""""""""""""""""""""""""""""""""""
 " git-branch-info
@@ -182,56 +195,35 @@ nnoremap <silent> tq :TlistClose<CR>
 let g:git_branch_status_text=": git :"
 
 """"""""""""""""""""""""""""""""""""""""""
-" git.vim
+" changelog.vim
 " ----------------------------------------
 
-let mapleader = ","
+let g:changelog_timeformat = "%Y-%m-%d"
+let g:changelog_username = "Hiroyuki Nakamura <hiroyuki@1vq9.com>"
+let g:spec_chglog_format = "%c Hiroyuki Nakamura <hiroyuki@1vq9.com>>"
+
+au BufNewFile,BufRead *.changelog,Changelog,Changes,ChangeLog setf changelog
 
 """"""""""""""""""""""""""""""""""""""""""
-" outputz.vim
+" neocomplecache
 " ----------------------------------------
 
-let g:outputz_secret_key="0Qb88DYAiqhb"
-let g:unable_outputz = 1
+let g:neocomplcache_enable_at_startup  = 1
+let g:neocomplcache_enable_auto_select = 1
+let g:neocomplcache_enable_smart_case  = 1 
+let g:neocomplcache_enable_underbar_completion = 1 
+let g:neocomplcache_disable_caching_file_path_pattern = 'fuf'
+let g:neocomplcache_lock_buffer_name_pattern = 'fuf'
+let g:neocomplcache_disable_select_mode_mappings = 1
+let g:neocomplcache_snippets_dir='~/.vim/snippets'
+let g:neocomplcache_max_list = 5
 
-""""""""""""""""""""""""""""""""""""""""""
-" cpan.vim
-" ----------------------------------------
+" inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+" inoremap <expr><C-n> pumvisible() ? "\<C-n>" : "\<C-x>\<C-u>\<C-p>"
 
-let g:cpan_install_command = 'sudo /usr/local/bin/cpan'
-let g:cpan_browser_command = '/usr/local/bin/cpan'
-" let g:cpan_win_mode   = g:CPAN.Mode.Installed
-let g:cpan_win_type   = 'vsplit'   " v (vertical) or s (split)
-let g:cpan_win_width  = 30
-let g:cpan_win_height = 10
-" let g:cpan_installed_cache  = expand('~/.vim-cpan-installed-modules')
-" let g:cpan_source_cache     = expand('~/.vim-cpan-source')
-let g:cpan_cache_expiry     = 60 * 24 * 3   " 7 days
-let g:cpan_max_result = 50
-let g:cpan_user_defined_sources = []
-
-""""""""""""""""""""""""""""""""""""""""""
-" the vim otl
-" ----------------------------------------
-
-set runtimepath+=~/.vim-otl
-
-""""""""""""""""""""""""""""""""""""""""""
-" HTML.vim
-" ----------------------------------------
-
-let g:do_xhtml_mappings = 'yes'
-let g:html_tag_case = 'lowercase'
-let g:html_template = '~/.vim/templates/default.html'
-let g:no_html_tab_mapping = "yes"
-let g:no_html_maps = '^\(;sp\|;ah\|;im\|;H\d\)$'
-
-""""""""""""""""""""""""""""""""""""""""""
-" VCSCommand.vim
-" ----------------------------------------
-
-" command Gd :VCSDiff
-" command Gb :VCSBlame
-nnoremap di :<C-u>VCSDiff<Enter>
-nnoremap bl :<C-u>VCSBlame<Enter>
+inoremap <expr><TAB> pumvisible() ? "\<C-n>" : neocomplcache#manual_keyword_complete()
+inoremap <expr><C-n> pumvisible() ? "\<C-n>" : neocomplcache#manual_keyword_complete()
+inoremap <expr><C-e> neocomplcache#close_popup()
+inoremap <expr><CR>  neocomplcache#smart_close_popup() ."\<CR>"
+inoremap <expr><C-j>  neocomplcache#manual_omni_complete()
 

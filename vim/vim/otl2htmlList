@@ -1,5 +1,0 @@
-#!/usr/bin/ruby
-
-dir = File.dirname(File.expand_path(__FILE__))
-
-puts `#{dir}/otlParser.rb -f HTMLList "#{ARGV[0]}"`
