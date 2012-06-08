@@ -37,6 +37,7 @@ Bundle 'tpope/vim-rake'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'JavaScript-syntax'
 Bundle 'pangloss/vim-javascript'
+Bundle 'scrooloose/syntastic'
 
 " Bundle 'benmills/vimux'
 
