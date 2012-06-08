@@ -227,3 +227,12 @@ inoremap <expr><C-e> neocomplcache#close_popup()
 inoremap <expr><CR>  neocomplcache#smart_close_popup() ."\<CR>"
 inoremap <expr><C-j>  neocomplcache#manual_omni_complete()
 
+""""""""""""""""""""""""""""""""""""""""""
+" syntastic
+" ----------------------------------------
+
+let g:syntastic_check_on_open=1
+let g:syntastic_mode_map = { 'mode': 'active',
+                           \ 'active_filetypes': ['ruby', 'php', 'perl'],
+                           \ 'passive_filetypes': ['puppet'] }
+
