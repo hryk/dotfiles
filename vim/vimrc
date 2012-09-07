@@ -256,5 +256,6 @@ inoremap <expr><C-j>  neocomplcache#manual_omni_complete()
 let g:syntastic_check_on_open=1
 
 let g:syntastic_mode_map = { 'mode': 'active',
-                           \ 'active_filetypes': ['ruby', 'php', 'python', 'javascript'],
+                           \ 'active_filetypes': ['ruby', 'php', 'python', 'perl', 'javascript'],
                            \ 'passive_filetypes': ['puppet', 'html'] }
+
