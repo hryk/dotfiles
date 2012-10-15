@@ -141,16 +141,24 @@ hi link coffeeSemicolonError NONE
 hi link coffeeReservedError NONE
 
 """"""""""""""""""""""""""""""""""""""""""
+" vimfiler
+"-----------------------------------------
+
+let g:vimfiler_as_default_explorer = 1
+" nnoremap <silent> lf :<C-u>VimFiler -split -simple -winwidth=35 -no-quit<CR>
+
+""""""""""""""""""""""""""""""""""""""""""
 " Unite
 "-----------------------------------------
 
-let g:unite_enable_start_insert = 1
+let g:unite_enable_start_insert = 0
+let g:unite_source_file_mru_filename_format = ''
 let g:unite_winheight = 15
 
-nnoremap <silent> <C-f> :<C-u>Unite -toggle -auto-resize file file_mru<Enter>
-nnoremap <silent> <C-c> :<C-u>UniteWithCurrentDir -toggle -auto-resize file<CR>
+nnoremap <silent> <C-f> :<C-u>Unite -toggle -auto-resize file file_mru file/new locate<Enter>
+nnoremap <silent> <C-c> :<C-u>UniteWithCurrentDir -toggle -auto-resize file file/new<CR>
 nnoremap <silent> <C-b> :<C-u>Unite -toggle buffer<Enter>
-nnoremap <silent> gb :<C-u>Unite -toggle file file_mru<Enter>
+nnoremap <silent> gb :<C-u>Unite -toggle file file/new file_mru<Enter>
 nnoremap <silent> bg :<C-u>Unite -toggle buffer<Enter>
 
 autocmd FileType unite cal s:unite_my_settings()
@@ -158,33 +166,14 @@ function! s:unite_my_settings()
   imap <silent><buffer> <C-j> <Plug>(unite_do_default_action)<CR>
   imap <silent><buffer> <Esc><Esc> <Plug>(unite_exit)<CR>
   nmap <silent><buffer> <Esc><Esc> <Plug>(unite_exit)<CR>
+  imap <silent><buffer> <Esc>j <Plug>(unite_exit)<CR>
+  nmap <silent><buffer> <Esc>j <Plug>(unite_exit)<CR>
+  nmap <silent><buffer> <Esc> <Plug>(unite_exit)<CR>
   nmap <silent><buffer> <C-w> <Plug>(unite_delete_backward_path)
   imap <silent><buffer> <C-w> <Plug>(unite_delete_backward_path)
   nmap <silent><buffer> <C-h> <Plug>(unite_delete_backward_char)
   imap <silent><buffer> <C-h> <Plug>(unite_delete_backward_char)
 endfunction
-
-""""""""""""""""""""""""""""""""""""""""""
-" Fuzzy Finder - 3.2
-"-----------------------------------------
-
-"" Options
-" let g:fuf_modesDisable = []
-" let g:fuf_keyOpen      = '<C-j>'
-" let g:fuf_keyOpenSplit = '<CR>'
-" let g:fuf_infoFile     = '~/.vim/fufinfo'
-
-" Binding
-" nnoremap <silent> <C-f><C-d> :<C-u>FufAddBookmark<Enter>
-" nnoremap <silent> <C-f><C-e> :<C-u>FufEditInfo<Enter>
-" nnoremap <silent> gb :<C-u>FufFile<Enter>
-" nnoremap <silent> bg :<C-u>FufBuffer<Enter>
-" nnoremap <silent> gd :<C-u>FufDir<Enter>
-" nnoremap <silent> bd :<C-u>FufBookmark<Enter>
-" nnoremap <silent> br :<C-u>FufMruFile<Enter>
-" nnoremap <silent> bc :<C-u>FufMruCmd<Enter>
-" nnoremap <silent> gt :<C-u>FufTag<Enker>
-" nnoremap <silent> bG :<C-u>FufFile <C-r>=expand('%:~:.')[:-1-len(expand('%:~:.:t'))]<Enter><Enter>
 
 """"""""""""""""""""""""""""""""""""""""""
 " Rails.vim
@@ -233,18 +222,18 @@ au BufNewFile,BufRead *.changelog,Changelog,Changes,ChangeLog setf changelog
 let g:neocomplcache_enable_at_startup  = 1
 let g:neocomplcache_enable_auto_select = 1
 let g:neocomplcache_enable_smart_case  = 1 
-let g:neocomplcache_enable_underbar_completion = 1 
-let g:neocomplcache_disable_caching_file_path_pattern = 'fuf'
-let g:neocomplcache_lock_buffer_name_pattern = 'fuf'
-let g:neocomplcache_disable_select_mode_mappings = 1
+let g:neocomplcache_enable_underbar_completion = 0
+" let g:neocomplcache_disable_select_mode_mappings = 1
+let g:neocomplcache_enable_fuzzy_completion = 1
 let g:neocomplcache_snippets_dir='~/.vim/snippets'
 let g:neocomplcache_max_list = 5
+
 
 " inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 " inoremap <expr><C-n> pumvisible() ? "\<C-n>" : "\<C-x>\<C-u>\<C-p>"
 
-inoremap <expr><TAB> pumvisible() ? "\<C-n>" : neocomplcache#manual_keyword_complete()
-inoremap <expr><C-n> pumvisible() ? "\<C-n>" : neocomplcache#manual_keyword_complete()
+" inoremap <expr><TAB> pumvisible() ? "\<C-n>" : neocomplcache#start_manual_complete()
+inoremap <expr><C-n> pumvisible() ? "\<C-n>" : neocomplcache#start_manual_complete()
 inoremap <expr><C-e> neocomplcache#close_popup()
 inoremap <expr><CR>  neocomplcache#smart_close_popup() ."\<CR>"
 inoremap <expr><C-j>  neocomplcache#manual_omni_complete()
@@ -256,6 +245,5 @@ inoremap <expr><C-j>  neocomplcache#manual_omni_complete()
 let g:syntastic_check_on_open=1
 
 let g:syntastic_mode_map = { 'mode': 'active',
-                           \ 'active_filetypes': ['ruby', 'php', 'python', 'perl', 'javascript'],
+                           \ 'active_filetypes': ['ruby', 'php', 'python', 'javascript'],
                            \ 'passive_filetypes': ['puppet', 'html'] }
-
