@@ -31,9 +31,9 @@ set number
 "" indenting
 set expandtab
 set ts=2
-" set tw=80
 set shiftwidth=2
 set softtabstop=2
+set tw=80
 
 "" backup
 set nobackup
@@ -114,10 +114,11 @@ endfunction
 " autocmds
 "----------------------------------------
 " autocmd!
-"
+
 au BufRead,BufNewFile *.thor   setf ruby
-au BufRead,BufNewFile *.coffee   setf coffee
-au BufNewFile,BufRead *.as     setf actionscript
+au BufRead,BufNewFile *.coffee setf coffee
+au BufRead,BufNewFile *.as     setf actionscript
+
 " delete trailing whitespace when saved.
 autocmd FileType c,cpp,java,php,ruby,javascript,haml,coffee,css autocmd BufWritePre <buffer> :%s/\s\+$//e
 autocmd User Rails Rnavcommand fabricator spec/fabricators -suffix=_fabricator.rb -default=model()
