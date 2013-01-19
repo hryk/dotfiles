@@ -47,5 +47,6 @@ Bundle 'Shougo/vimproc'
 Bundle 'Shougo/vimfiler'
 " Bundle 'ujihisa/unite-locate'
 Bundle 'nyarly/Simplecov-Vim'
+Bundle 'fuenor/JpFormat.vim'
 
 filetype plugin indent on

@@ -248,3 +248,21 @@ let g:syntastic_check_on_open=1
 let g:syntastic_mode_map = { 'mode': 'active',
                            \ 'active_filetypes': ['ruby', 'php', 'python', 'javascript'],
                            \ 'passive_filetypes': ['puppet', 'html'] }
+
+" gcc syntax checker
+
+let g:syntastic_c_check_header      = 0
+let g:syntastic_c_no_include_search = 1
+let g:syntastic_c_auto_refresh_includes = 0
+let g:syntastic_c_remove_include_errors = 1
+
+""""""""""""""""""""""""""""""""""""""""""
+" jpFormat
+" ----------------------------------------
+
+set formatoptions+=mM
+set formatexpr=jpvim#formatexpr()
+nnoremap <silent> jf :<C-u>JpFormatAll<Enter>
+nnoremap <silent> JF :<C-u>JpFormatAll!<Enter>
+vnoremap <silent> jf :<C-u>JpFormat<Enter>
+
