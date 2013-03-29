@@ -159,6 +159,7 @@ let g:unite_winheight = 15
 nnoremap <silent> <C-f> :<C-u>Unite -toggle -auto-resize file file_mru file/new locate<Enter>
 nnoremap <silent> <C-c> :<C-u>UniteWithCurrentDir -toggle -auto-resize file file/new<CR>
 nnoremap <silent> <C-b> :<C-u>Unite -toggle buffer<Enter>
+nnoremap <silent> gl :<C-u>Unite -toggle git<Enter>
 nnoremap <silent> gb :<C-u>Unite -toggle file file/new file_mru<Enter>
 nnoremap <silent> bg :<C-u>Unite -toggle buffer<Enter>
 
@@ -249,20 +250,15 @@ let g:syntastic_mode_map = { 'mode': 'active',
                            \ 'active_filetypes': ['ruby', 'php', 'python', 'javascript'],
                            \ 'passive_filetypes': ['puppet', 'html'] }
 
-" gcc syntax checker
-
-let g:syntastic_c_check_header      = 0
-let g:syntastic_c_no_include_search = 1
-let g:syntastic_c_auto_refresh_includes = 0
-let g:syntastic_c_remove_include_errors = 1
 
 """"""""""""""""""""""""""""""""""""""""""
-" jpFormat
+" linediff
 " ----------------------------------------
 
-set formatoptions+=mM
-set formatexpr=jpvim#formatexpr()
-nnoremap <silent> jf :<C-u>JpFormatAll<Enter>
-nnoremap <silent> JF :<C-u>JpFormatAll!<Enter>
-vnoremap <silent> jf :<C-u>JpFormat<Enter>
+" vnoremap ld :<C-u>Linediff <Enter>
+" nnoremap lr :<C-u>LinediffReset <Enter>
+
+let g:html_indent_inctags = "html,body,head,tbody"
+let g:html_indent_script1 = "inc"
+let g:html_indent_style1  = "inc"
 
