@@ -33,14 +33,19 @@ set expandtab
 set ts=2
 set shiftwidth=2
 set softtabstop=2
-set tw=80
 
 "" backup
 set nobackup
 
 "" statusline
 set laststatus=2
-set statusline=%<%f\%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']['.&ft.']'}%{fugitive#statusline()}/1p%=%l,%c%V%8P 
+"" set statusline=%<%f\%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']['.&ft.']'}%{fugitive#statusline()}/1p%=%l,%c%V%8P 
+set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+python from powerline.vim import setup as powerline_setup
+python powerline_setup()
+python del powerline_setup
+let g:Powerline_theme='short'
+let g:Powerline_colorscheme='solarized256_dark'
 
 "" encodings
 set termencoding=utf-8
@@ -53,7 +58,6 @@ nnoremap fs :<C-u>e ++enc=shift-jis<Enter>
 nnoremap fu :<C-u>e ++enc=utf-8<Enter>
 
 "" folding
-
 set foldmethod=marker
 
 " key binding
@@ -93,7 +97,7 @@ onoremap gc :<C-u>normal gc<Enter>
 "" redraw
 nnoremap sh :<C-u>redraw!<Enter>
 
-"" wordwrap
+" wordwrap
 " nnoremap GG gqG
 
 nnoremap <Leader>H :call<SID>LongLineHLToggle()<cr>
@@ -248,7 +252,7 @@ let g:syntastic_check_on_open=1
 
 let g:syntastic_mode_map = { 'mode': 'active',
                            \ 'active_filetypes': ['ruby', 'php', 'python', 'javascript'],
-                           \ 'passive_filetypes': ['puppet', 'html'] }
+                           \ 'passive_filetypes': ['puppet', 'html', 'java'] }
 
 
 """"""""""""""""""""""""""""""""""""""""""
@@ -262,3 +266,8 @@ let g:html_indent_inctags = "html,body,head,tbody"
 let g:html_indent_script1 = "inc"
 let g:html_indent_style1  = "inc"
 
+""""""""""""""""""""""""""""""""""""""""""
+" markdown
+" ----------------------------------------
+
+let g:vim_markdown_folding_disabled=1

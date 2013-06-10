@@ -6,52 +6,45 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 Bundle 'gmarik/vundle'
-" powerline
+
+" vim plugin site
+" Bundle 'linediff.vim'
+Bundle 'taglist-plus'
 
 " github repos
-"" Colors
 Bundle 'altercation/vim-colors-solarized'
-"" Syntax
 Bundle 'tpope/vim-haml'
-Bundle 'tpope/vim-markdown'
 Bundle 'rodjek/vim-puppet'
-"" Bundle 'JavaScript-syntax'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'pangloss/vim-javascript'
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'timcharper/textile.vim'
+Bundle 'plasticboy/vim-markdown'
 Bundle 'vim-scripts/jade.vim'
 Bundle 'vim-scripts/spec.vim'
-"" Language/Project Utils
-Bundle 'astashov/vim-ruby-debugger'
-Bundle 'c9s/perlomni.vim'
-Bundle 'hotchpotch/perldoc-vim'
 Bundle 'shemerey/vim-project'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-rake'
 Bundle 'scrooloose/syntastic'
-Bundle 'jpalardy/vim-slime'
-Bundle 'taglist-plus'
-"" Vim Utils
 Bundle 'Shougo/neocomplcache'
 Bundle 'edsono/vim-matchit'
 Bundle 'ciaranm/detectindent'
 Bundle 'scrooloose/nerdcommenter'
-" Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 Bundle 'tsale/vim-align'
 Bundle 'sickill/vim-pasta'
 Bundle 'Shougo/unite.vim'
 Bundle 'Shougo/vimproc'
 Bundle 'Shougo/vimfiler'
-" Bundle 'ujihisa/unite-locate'
 Bundle 'nyarly/Simplecov-Vim'
 Bundle 'tokuhirom/unite-git'
-Bundle 'linediff.vim'
 Bundle 'sunaku/vim-ruby-minitest'
 Bundle 'fuenor/JpFormat.vim'
 Bundle 'JuliaLang/julia-vim'
 Bundle 'airblade/vim-gitgutter'
+Bundle 'jnwhiteh/vim-golang'
+Bundle 'Lokaltog/powerline'
+Bundle 'stephenmckinney/vim-solarized-powerline'
 
 filetype plugin indent on
