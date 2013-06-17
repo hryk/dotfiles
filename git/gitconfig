@@ -40,6 +40,11 @@
   fd = flow feature finish
   yt = youtrack
   ig = !gibo
+  stage   = "!f() { git add $1; }; f"
+  unstage = "!f() { git reset HEAD $1; }; f"
+  amend   = commit --amend
+  undo    = "!f() { git checkout $1; }; f"
+
 
 # git-browse-remote
 ## http://subtech.g.hatena.ne.jp/motemen/20120917/1347889804
