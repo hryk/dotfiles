@@ -3,14 +3,13 @@ set nocompatible
 " Chicken Or Egg Dilemma
 "   http://gmarik.info/blog/2011/05/17/chicken-or-egg-dilemma
 source $HOME/.vim/bundles.vim " $ vim -u bundles.vim +BundleInstall +q
-syntax on
 
 "" color scheme
-set background=light
-if has('gui_running')
-  colorscheme solarized
-  let g:solarized_termcolors=256
-endif
+
+syntax enable
+set background=dark
+let g:solarized_termcolors=256
+colorscheme solarized
 
 set backspace=eol,indent,start
 
@@ -39,13 +38,7 @@ set nobackup
 
 "" statusline
 set laststatus=2
-"" set statusline=%<%f\%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']['.&ft.']'}%{fugitive#statusline()}/1p%=%l,%c%V%8P 
-set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
-python from powerline.vim import setup as powerline_setup
-python powerline_setup()
-python del powerline_setup
-let g:Powerline_theme='short'
-let g:Powerline_colorscheme='solarized256_dark'
+
 
 "" encodings
 set termencoding=utf-8
@@ -156,7 +149,7 @@ let g:vimfiler_as_default_explorer = 1
 " Unite
 "-----------------------------------------
 
-let g:unite_enable_start_insert = 0
+let g:unite_enable_start_insert = 1
 let g:unite_source_file_mru_filename_format = ''
 let g:unite_winheight = 15
 
@@ -252,7 +245,10 @@ let g:syntastic_check_on_open=1
 
 let g:syntastic_mode_map = { 'mode': 'active',
                            \ 'active_filetypes': ['ruby', 'php', 'python', 'javascript'],
-                           \ 'passive_filetypes': ['puppet', 'html', 'java'] }
+                           \ 'passive_filetypes': ['puppet', 'html', 'haml', 'java'] }
+
+let g:syntastic_ruby_checkers = ['mri', 'rubocop', 'macruby']
+let g:syntastic_ruby_exec = '~/.rbenv/versions/2.0.0-p195/bin/ruby'
 
 
 """"""""""""""""""""""""""""""""""""""""""

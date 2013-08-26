@@ -44,7 +44,7 @@ Bundle 'fuenor/JpFormat.vim'
 Bundle 'JuliaLang/julia-vim'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'jnwhiteh/vim-golang'
-Bundle 'Lokaltog/powerline'
+Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Bundle 'stephenmckinney/vim-solarized-powerline'
 
 filetype plugin indent on
