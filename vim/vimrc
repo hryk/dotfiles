@@ -11,6 +11,10 @@ set background=dark
 let g:solarized_termcolors=256
 colorscheme solarized
 
+if has('gui_running')
+    set guifont=Menlo\ for\ Powerline:h12
+endif
+
 set backspace=eol,indent,start
 
 "" search pattern
@@ -43,7 +47,7 @@ set laststatus=2
 "" encodings
 set termencoding=utf-8
 set encoding=utf-8
-set fileencodings=utf-8,euc-jp,iso-2022-jp
+set fileencodings=utf-8,euc-jp,iso-2022-jp,shift-jis
 set ambiwidth=double
 
 nnoremap fe :<C-u>e ++enc=euc-jp<Enter>
@@ -115,6 +119,7 @@ endfunction
 au BufRead,BufNewFile *.thor   setf ruby
 au BufRead,BufNewFile *.coffee setf coffee
 au BufRead,BufNewFile *.as     setf actionscript
+au BufRead,BufNewFile *.rl     set syn=ragel
 
 " delete trailing whitespace when saved.
 autocmd FileType c,cpp,java,php,ruby,javascript,haml,coffee,css autocmd BufWritePre <buffer> :%s/\s\+$//e
@@ -149,6 +154,7 @@ let g:vimfiler_as_default_explorer = 1
 " Unite
 "-----------------------------------------
 
+
 let g:unite_enable_start_insert = 1
 let g:unite_source_file_mru_filename_format = ''
 let g:unite_winheight = 15
@@ -157,7 +163,7 @@ nnoremap <silent> <C-f> :<C-u>Unite -toggle -auto-resize file file_mru file/new 
 nnoremap <silent> <C-c> :<C-u>UniteWithCurrentDir -toggle -auto-resize file file/new<CR>
 nnoremap <silent> <C-b> :<C-u>Unite -toggle buffer<Enter>
 nnoremap <silent> gl :<C-u>Unite -toggle git<Enter>
-nnoremap <silent> gb :<C-u>Unite -toggle file file/new file_mru<Enter>
+nnoremap <silent> gb :<C-u>Unite -buffer-name=files -toggle file directory file/new file_mru git<Enter>
 nnoremap <silent> bg :<C-u>Unite -toggle buffer<Enter>
 
 autocmd FileType unite cal s:unite_my_settings()
@@ -184,19 +190,17 @@ nnoremap rr :<C-u>1R<Space>
 " Surround
 "-----------------------------------------
 
-let g:surround_45 = "<% \r -%>"
+let g:surround_45 = "<% \r %>"
 let g:surround_61 = "<%= \r %>"
 let g:surround_{char2nr("g")} = "[[\r]]"
 
 """"""""""""""""""""""""""""""""""""""""""
-" taglist
+" tagbar
 " ----------------------------------------
 
-let Tlist_Auto_Open       = 0
-let Tlist_Close_On_Select = 1
-let Tlist_Ctags_Cmd='/usr/local/bin/ctags'
-nnoremap <silent> tl :TlistToggle<CR>
-nnoremap <silent> tq :TlistClose<CR>
+let g:tagbar_ctags_bin ='/usr/local/bin/ctags'
+nnoremap <silent> tl :TagbarToggle<CR>
+nnoremap <silent> tq :TagbarClose<CR>
 
 """"""""""""""""""""""""""""""""""""""""""
 " git-branch-info
@@ -241,13 +245,16 @@ inoremap <expr><C-j>  neocomplcache#manual_omni_complete()
 " syntactic
 " ----------------------------------------
 
-let g:syntastic_check_on_open=1
+let g:syntastic_check_on_open=0
+let g:syntastic_check_on_wq=1
 
 let g:syntastic_mode_map = { 'mode': 'active',
-                           \ 'active_filetypes': ['ruby', 'php', 'python', 'javascript'],
+                           \ 'active_filetypes': ['ruby', 'php', 'python', 'javascript', 'coffee'],
                            \ 'passive_filetypes': ['puppet', 'html', 'haml', 'java'] }
 
-let g:syntastic_ruby_checkers = ['mri', 'rubocop', 'macruby']
+let g:syntastic_ruby_checkers = ['mri', 'rubocop']
+let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_javascript_eslint_conf = "~/.eslint.json"
 let g:syntastic_ruby_exec = '~/.rbenv/versions/2.0.0-p195/bin/ruby'
 
 
@@ -267,3 +274,12 @@ let g:html_indent_style1  = "inc"
 " ----------------------------------------
 
 let g:vim_markdown_folding_disabled=1
+
+""""""""""""""""""""""""""""""""""""""""""
+" JpFormat
+" ----------------------------------------
+
+nnoremap <silent> ff :<C-u>JpFormatAll<CR>
+nnoremap <silent> <Esc>o :<C-u>JpJoinAll<CR>
+
+
