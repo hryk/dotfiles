@@ -1,0 +1,37 @@
+{
+	"default_module": "powerline.segments.common",
+	"segment_data": {
+		"uptime": {
+			"before": "⇑  "
+		},
+		"external_ip": {
+			"before": "ⓦ  "
+		},
+		"date": {}
+	},
+	"segments": {
+		"right": [
+			{
+        "name": "system_load",
+				"function": "powerline.segments.common.sys.system_load",
+				"priority": 50
+			},
+			{
+        "name": "date",
+				"function": "powerline.segments.common.time.date"
+			},
+			{
+        "name": "time",
+				"function": "powerline.segments.common.time.date",
+				"args": {
+					"format": "%H:%M",
+					"istime": true
+				}
+			},
+			{
+        "name": "external_ip",
+				"function": "powerline.segments.common.net.external_ip"
+			}
+		]
+	}
+}
