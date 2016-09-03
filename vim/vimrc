@@ -251,11 +251,11 @@ let g:syntastic_check_on_wq=1
 let g:syntastic_mode_map = { 'mode': 'active',
                            \ 'active_filetypes': ['ruby', 'php', 'python', 'javascript', 'coffee'],
                            \ 'passive_filetypes': ['puppet', 'html', 'haml', 'java'] }
-
-let g:syntastic_ruby_checkers = ['mri', 'rubocop']
-let g:syntastic_javascript_checkers = ['jshint']
-let g:syntastic_javascript_eslint_conf = "~/.eslint.json"
-let g:syntastic_ruby_exec = '~/.rbenv/versions/2.0.0-p195/bin/ruby'
+let g:syntastic_ruby_exec = "~/.rbenv/versions/2.2.4/bin/ruby"
+let g:syntastic_ruby_checkers = ['mri', 'rubocop', 'reek']
+let g:syntastic_python_checkers = ['flake8', 'pylint']
+let g:syntastic_javascript_checkers = ['eslint']
+" let g:syntastic_javascript_eslint_conf = "~/.eslint.json"
 
 
 """"""""""""""""""""""""""""""""""""""""""
