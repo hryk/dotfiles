@@ -70,7 +70,7 @@ export GISTY_DIR="$HOME/Develop/gists"
 export GISTY_SSL_VERIFY="none"
 export GISTY_ACCESS_TOKEN="4121d1e605c2677bb3ee6052c1a3f441b7742eb5"
 
-export WORQUE_PATH='$HOME/Dropbox/Documents/Todo'
+export WORQUE_PATH="$HOME/Dropbox/Documents/Todo"
 alias today="vim $(worque todo) +':cd $WORQUE_PATH'"
 
 # Aliases
