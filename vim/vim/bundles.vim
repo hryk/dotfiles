@@ -49,6 +49,7 @@ Plugin 'vim-ruby/vim-ruby'
 Plugin 'vim-scripts/jade.vim'
 Plugin 'vim-scripts/spec.vim'
 Plugin 'rust-lang/rust.vim'
+Plugin 'editorconfig/editorconfig-vim'
 
 call vundle#end()
 filetype plugin indent on

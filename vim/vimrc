@@ -282,4 +282,11 @@ let g:vim_markdown_folding_disabled=1
 nnoremap <silent> ff :<C-u>JpFormatAll<CR>
 nnoremap <silent> <Esc>o :<C-u>JpJoinAll<CR>
 
+""""""""""""""""""""""""""""""""""""""""""
+" powerline
+" ----------------------------------------
+
+python from powerline.vim import setup as powerline_setup
+python powerline_setup()
+python del powerline_setup
 
