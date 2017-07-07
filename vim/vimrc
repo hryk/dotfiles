@@ -209,6 +209,13 @@ nnoremap <silent> tq :TagbarClose<CR>
 let g:git_branch_status_text=": git :"
 
 """"""""""""""""""""""""""""""""""""""""""
+" fugitive
+" ----------------------------------------
+
+nnoremap <silent> gw :Gwrite<CR>
+nnoremap <silent> gc :Gcommit<CR>
+
+""""""""""""""""""""""""""""""""""""""""""
 " changelog.vim
 " ----------------------------------------
 
@@ -283,19 +290,20 @@ let g:neocomplete#force_omni_input_patterns.ruby = '[^.*\t]\.\w*\|\h\w*::'
 " ale
 " ----------------------------------------
 
+let g:ale_enabled = 1
+let g:airline#extensions#ale#enabled = 1
 let g:ale_sign_column_always = 1
 
 nnoremap <silent> <C-k> <Plug>(ale_previous_wrap)
 nnoremap <silent> <C-j> <Plug>(ale_next_wrap)
 
 "" Write this in your vimrc file
-" let g:ale_lint_on_save = 1
-" let g:ale_lint_on_text_changed = 1
-"" You can disable this option too
-"" if you don't want linters to run on opening a file
-" let g:ale_lint_on_enter = 0
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_text_changed = 0
+let g:ale_lint_on_enter = 1
 
 let g:ale_set_quickfix = 1
+let g:ale_python_pylint_options = '-rcfile ~/.pylint.rc'
 
 """"""""""""""""""""""""""""""""""""""""""
 " linediff
@@ -328,3 +336,65 @@ nnoremap <silent> <Esc>o :<C-u>JpJoinAll<CR>
 python from powerline.vim import setup as powerline_setup
 python powerline_setup()
 python del powerline_setup
+
+""""""""""""""""""""""""""""""""""""""""""
+" python-mode
+" ----------------------------------------
+
+let g:pymode = 1
+let g:pymode_warnings = 0
+let g:pymode_paths = []
+let g:pymode_trim_whitespaces = 0
+let g:pymode_options = 0
+let g:pymode_options_max_line_length = 79
+let g:pymode_options_colorcolumn = 0
+let g:pymode_quickfix_minheight = 3
+let g:pymode_quickfix_maxheight = 6
+let g:pymode_python = 'python'
+let g:pymode_indent = 0
+let g:pymode_folding = 0
+let g:pymode_motion = 0
+let g:pymode_doc = 0
+let g:pymode_doc_bind = 'K'
+let g:pymode_virtualenv = 0
+let g:pymode_virtualenv_path = $VIRTUAL_ENV
+let g:pymode_run = 0
+let g:pymode_run_bind = '<leader>r'
+let g:pymode_breakpoint = 0
+let g:pymode_breakpoint_cmd = ''
+let g:pymode_lint = 0
+let g:pymode_lint_on_write = 0
+let g:pymode_lint_unmodified = 0
+let g:pymode_lint_on_fly = 0
+let g:pymode_lint_message = 0
+" Values may be chosen from: `pylint`, `pep8`, `mccabe`, `pep257`, `pyflakes`
+let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe']
+let g:pymode_lint_ignore = "E501,W"
+" let g:pymode_lint_select = "E501,W0011,W430"
+let g:pymode_lint_sort = []
+let g:pymode_lint_cwindow = 0
+let g:pymode_lint_signs = 0
+let g:pymode_lint_todo_symbol = 'WW'
+let g:pymode_lint_comment_symbol = 'CC'
+let g:pymode_lint_visual_symbol = 'RR'
+let g:pymode_lint_error_symbol = 'EE'
+let g:pymode_lint_info_symbol = 'II'
+let g:pymode_lint_pyflakes_symbol = 'FF'
+" rope
+let g:pymode_rope = 0
+let g:pymode_rope_completion = 0
+let g:pymode_rope_complete_on_dot = 0
+let g:pymode_rope_completion_bind = '<C-Space>'
+let g:pymode_rope_autoimport = 0
+let g:pymode_rope_autoimport_modules = ['os', 'shutil', 'datetime']
+let g:pymode_rope_autoimport_import_after_complete = 0
+let g:pymode_syntax = 0
+let g:pymode_syntax_slow_sync = 0
+let g:pymode_syntax_all = 0
+let g:pymode_syntax_print_as_function = 0
+let g:pymode_syntax_highlight_async_await = g:pymode_syntax_all
+
+augroup filetypedetect
+  au BufNewFile,BufRead *.gff3  set filetype=gff
+augroup END
+

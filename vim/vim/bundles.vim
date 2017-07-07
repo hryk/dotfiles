@@ -50,12 +50,14 @@ Plugin 'Quramy/tsuquyomi'
 " Python
 Plugin 'python-mode/python-mode'
 Plugin 'pytest.vim'
+Plugin 'Vimjas/vim-python-pep8-indent'
 " Others
 Plugin 'rodjek/vim-puppet'
 Plugin 'rust-lang/rust.vim'
 Plugin 'jnwhiteh/vim-golang'
 Plugin 'JuliaLang/julia-vim'
 Plugin 'plasticboy/vim-markdown'
+Plugin 'viklund/bio-vim'
 
 call vundle#end()
 filetype plugin indent on
