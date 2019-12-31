@@ -1,63 +1,97 @@
+" 2019-12-31:
+"		- Vundle から vim-plug へ移行
+"   - unite, neocomplcache, vimfiler を deoplete, denite, defx に変更
+"   - ale のリポジトリを dense-analysis に変更
+"   - 使っていないプラグインを削除
+"
+
 set nocompatible
 
-filetype off " for Vundle
+" Plugins will be downloaded under the specified directory.
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+call plug#begin('~/.vim/bundle')
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#rc()
+" deoplete, denite, defx
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
+	Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'Shougo/denite.nvim'
+	Plug 'Shougo/defx.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+Plug 'Shougo/neomru.vim'
 
-Plugin 'VundleVim/Vundle.vim'
+" Linting
+Plug 'dense-analysis/ale'
 
-Plugin 'majutsushi/tagbar'
-Plugin 'Shougo/neocomplete.vim'
-Plugin 'Shougo/unite.vim'
-Plugin 'Shougo/neomru.vim'
-Plugin 'Shougo/vimfiler'
-Plugin 'Shougo/vimproc'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'fuenor/JpFormat.vim'
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'ntpeters/vim-better-whitespace'
-Plugin 'godlygeek/tabular'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'w0rp/ale'
-Plugin 'shemerey/vim-project'
-Plugin 'sickill/vim-pasta'
-Plugin 'stephenmckinney/vim-solarized-powerline'
-Plugin 'tokuhirom/unite-git'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
-Plugin 'editorconfig/editorconfig-vim'
+" Color, Style, Format
+Plug 'altercation/vim-colors-solarized'
+Plug 'airblade/vim-gitgutter'
+Plug 'fuenor/JpFormat.vim'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'ntpeters/vim-better-whitespace'
+
+" Edit
+Plug 'scrooloose/nerdcommenter'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-sensible'
+Plug 'AndrewRadev/linediff.vim'
+" Plug 'godlygeek/tabular'
+" Plug 'sickill/vim-pasta'
+
+" Utilities
+Plug 'majutsushi/tagbar'
+Plug 'tpope/vim-fugitive'
+Plug 'editorconfig/editorconfig-vim'
+
 "
 " Language support
 "
+
 " Ruby
 "
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'tpope/vim-haml'
-Plugin 'nyarly/cadre'
-Plugin 'tpope/vim-rails'
-Plugin 'tpope/vim-rake'
-Plugin 'thoughtbot/vim-rspec'
-" JavaScript
-Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
-Plugin 'vim-scripts/jade.vim'
-" TypeScript
-Plugin 'leafgarland/typescript-vim'
-Plugin 'mhartington/vim-typings'
-Plugin 'Quramy/tsuquyomi'
-" Python
-Plugin 'python-mode/python-mode'
-Plugin 'pytest.vim'
-Plugin 'Vimjas/vim-python-pep8-indent'
-" Others
-Plugin 'rodjek/vim-puppet'
-Plugin 'rust-lang/rust.vim'
-Plugin 'jnwhiteh/vim-golang'
-Plugin 'JuliaLang/julia-vim'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'viklund/bio-vim'
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-haml'
+Plug 'tpope/vim-rails'
+" Plug 'thoughtbot/vim-rspec'
+" Plug 'tpope/vim-rake'
 
-call vundle#end()
-filetype plugin indent on
+" JavaScript, TypeScript
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'digitaltoad/vim-pug'
+Plug 'posva/vim-vue'
+Plug 'jason0x43/vim-js-indent'
+Plug 'othree/jspc.vim'
+Plug 'ternjs/tern_for_vim'
+" TypeScript
+" Plug 'leafgarland/typescript-vim'
+" Plug 'mhartington/vim-typings'
+" Plug 'Quramy/tsuquyomi'
+
+" Python
+Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+Plug 'Vimjas/vim-python-pep8-indent'
+Plug 'davidhalter/jedi-vim'
+Plug 'deoplete-plugins/deoplete-jedi'
+Plug 'psf/black'
+
+" Others
+Plug 'rust-lang/rust.vim'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'plasticboy/vim-markdown'
+Plug 'bioSyntax/bioSyntax-vim'
+
+" List ends here. Plugins become visible to Vim after this call.
+call plug#end()
