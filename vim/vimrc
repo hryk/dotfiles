@@ -118,7 +118,7 @@ au BufRead,BufNewFile *.thor   setf ruby
 au BufRead,BufNewFile *.coffee setf coffee
 au BufRead,BufNewFile *.rl     set syn=ragel
 
-autocmd User Rails Rnavcommand fabricator spec/fabricators -suffix=_fabricator.rb -default=model()
+" autocmd User Rails Rnavcommand fabricator spec/fabricators -suffix=_fabricator.rb -default=model()
 
 """"""""""""""""""""""""""""""""""""""""""
 " Plugin Settings
@@ -243,8 +243,8 @@ au BufNewFile,BufRead *.changelog,Changelog,Changes,ChangeLog setf changelog
 " Shougo/deoplete.nvim
 " ----------------------------------------
 
-let g:python_host_prog = expand('~/.pyenv/shims/python2')
-let g:python3_host_prog = expand('~/.pyenv/shims/python3')
+let g:python_host_prog = expand('/usr/local/var/pyenv/shims/python2')
+let g:python3_host_prog = expand('/usr/local/var/pyenv/shims/python3')
 
 let g:deoplete#enable_at_startup = 1
 
@@ -262,6 +262,11 @@ call deoplete#custom#source('omni', 'functions', {
     \ 'html':  'htmlcomplete#CompleteTags',
     \ 'javascript': ['tern#Complete', 'jspc#omni']
     \})
+
+autocmd FileType fasta call s:fasta_my_settings()
+function! s:fasta_my_settings() abort
+  call deoplete#custom#option('auto_complete', v:false)
+endfunction
 
 """"""""""""""""""""""""""""""""""""""""""
 " Shougo/defx.nvim
@@ -361,9 +366,22 @@ nnoremap <silent> <C-j> <Plug>(ale_next_wrap)
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 0
 let g:ale_lint_on_enter = 1
-
 let g:ale_set_quickfix = 1
-let g:ale_python_pylint_options = '-rcfile ~/.pylint.rc'
+let g:ale_fix_on_save = 1
+
+let g:ale_linters = {
+\  'javascript': ['eslint'],
+\  'python': ['prospector'],
+\ }
+
+let g:ale_fixers = {
+\   'python': [
+\       'black', 'reorder-python-imports',
+\  ],
+\ }
+
+let g:ale_python_pylint_options = "-d import-error -d bad-continuation"
+
 
 """"""""""""""""""""""""""""""""""""""""""
 " AndrewRadev/linediff.vim
@@ -395,16 +413,10 @@ python3 powerline_setup()
 python3 del powerline_setup
 
 """"""""""""""""""""""""""""""""""""""""""
-" psf/black
-" ----------------------------------------
-
-autocmd BufWritePre *.py execute ':Black'
-
-""""""""""""""""""""""""""""""""""""""""""
 " python-mode
 " ----------------------------------------
 
-let g:pymode = 1
+let g:pymode = 0
 let g:pymode_warnings = 0
 let g:pymode_paths = []
 let g:pymode_trim_whitespaces = 0
