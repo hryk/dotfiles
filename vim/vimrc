@@ -370,7 +370,7 @@ let g:ale_set_quickfix = 1
 let g:ale_fix_on_save = 1
 
 let g:ale_linters = {
-\  'javascript': ['eslint'],
+\  'javascript': ['eslint', 'prettier'],
 \  'python': ['prospector'],
 \ }
 
@@ -378,6 +378,9 @@ let g:ale_fixers = {
 \   'python': [
 \       'black', 'reorder-python-imports',
 \  ],
+\   'javascript': ['prettier'],
+\   'css': ['prettier'],
+\   'vue': ['prettier'],
 \ }
 
 let g:ale_python_pylint_options = "-d import-error -d bad-continuation"
